@@ -1,0 +1,83 @@
+[
+    {
+        "context": "Editor && VimControl && !VimWaiting && !menu",
+        "bindings": {
+            // put key-bindings here if you want them to work in normal & visual mode
+        }
+    },
+    {
+        "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
+        "bindings": {
+            // put key-bindings here if you want them to work only in normal mode
+            //buffer navigation
+            "shift-h": "pane::ActivatePrevItem",
+            "shift-l": "pane::ActivateNextItem",
+            //save buffer
+            "space w": "workspace::Save",
+            //close buffer
+            "space q": "pane::CloseActiveItem",
+            //pane navigation
+            "ctrl-h": "project_panel::ToggleFocus",
+            //hover
+            "shift-k": "editor::Hover",
+            //go to definition
+            "g d": "editor::GoToDefinition",
+            //command palette
+            "space /": "command_palette::Toggle",
+            //toggle outline
+            "space o": "outline::Toggle",
+            "space a": "editor::ToggleCodeActions",
+            //lsp
+            "space l s": "editor::Rename",
+            "space l v": "editor::MoveToEnclosingBracket",
+            "ctrl-j": ["workspace::ActivatePaneInDirection", "Down"]
+            // "j": [
+            //     "vim::Down",
+            //     {
+            //         "displayLines": true
+            //     }
+            // ],
+            // "k": [
+            //     "vim::Up",
+            //     {
+            //         "displayLines": true
+            //     }
+            // ]
+        }
+    },
+    {
+        "context": "Editor && vim_mode == visual && !VimWaiting && !menu",
+        "bindings": {
+            // visual, visual line & visual block modes
+            // comment
+            "g c": "editor::ToggleComments"
+        }
+    },
+    {
+        "context": "Editor && vim_mode == insert && !menu",
+        "bindings": {
+            // put key-bindings here if you want them to work in insert mode
+            "j k": "vim::NormalBefore"
+        }
+    },
+    // Proect Panel
+    {
+        "context": "ProjectPanel",
+        "bindings": {
+            "l": "project_panel::Open",
+            "j": "menu::SelectNext",
+            "k": "menu::SelectPrev",
+            "ctrl-y": "project_panel::Copy",
+            "y": "project_panel::CopyRelativePath"
+        }
+    },
+    {
+        "context": "Dock",
+        "bindings": {
+            "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
+            "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
+            "ctrl-k": ["workspace::ActivatePaneInDirection", "Up"],
+            "ctrl-j": ["workspace::ActivatePaneInDirection", "Down"]
+        }
+    }
+]

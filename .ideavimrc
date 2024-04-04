@@ -1,0 +1,84 @@
+" use :actionlist to show all actions
+
+set surround
+set commentary
+set sneak
+set ignorecase smartcase
+set incsearch
+set hlsearch
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set smartindent
+
+set which-key
+set notimeout
+
+" 0 -> first non-blank character
+map 0 ^
+
+" No annoying sound on errors
+set visualbell
+
+" system clipboard
+set clipboard+=unnamed
+set clipboard+=ideaput
+
+" nerd tree
+set NERDTree
+let g:NERDTreeMapActivateNode='l'
+
+set idearefactormode=keep
+set ideavimsupport+=singleline
+
+" buffer navigation
+sethandler <c-j> a:vim
+sethandler <c-k> a:vim
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+
+" which key
+let mapleader=" "
+map <leader>q <Action>(CloseContent)
+nnoremap <leader>w :action SaveDocument<CR>
+map <leader>f <Action>(SearchEverywhere)
+map <leader>a :action ShowIntentionActions<CR>
+" lsp
+map <leader>ls <Action>(RenameElement)
+map <leader>lk <Action>(GotoPreviousError)
+map <leader>lj <Action>(GotoNextError)
+map <leader>lf <Action>(ReformatCode)
+" buffer
+map <leader>bl <Action>(MoveEditorToOppositeTabGroup)
+map <leader>bv <Action>(SplitVertically)
+map <leader>bo :action CloseAllEditorsButActive<CR>
+" debug
+map <leader>dd :action Debug<CR>
+map <leader>dq :action Stop<CR>
+
+let g:WhichKey_DefaultDelay = 0
+let g:WhichKeyDesc_close = "<Space>q  Close"
+let g:WhichKeyDesc_save = "<Space>w  Save"
+let g:WhichKeyDesc_search = "<Space>f  Search"
+let g:WhichKeyDesc_action = "<Space>a  Context Action"
+let g:WhichKeyDesc_lsp= "<Space>l  lsp"
+let g:WhichKeyDesc_lsp_rename= "<Space>ls  Rename Symbol"
+let g:WhichKeyDesc_lsp_preerror= "<Space>lk  Previous Error"
+let g:WhichKeyDesc_lsp_nexterror= "<Space>lj  Next Error"
+let g:WhichKeyDesc_lsp_format= "<Space>lf  Format"
+let g:WhichKeyDesc_buffer= "<Space>b  buffer"
+let g:WhichKeyDesc_buffer_splitvertically= "<Space>bv  Split Vertically"
+let g:WhichKeyDesc_buffer_movetoopposite= "<Space>bl  Move to Opposite"
+let g:WhichKeyDesc_buffer_closeothers= "<Space>bo  Close Others"
+let g:WhichKeyDesc_debug= "<Space>d  Debug"
+let g:WhichKeyDesc_buffer_debug= "<Space>dd  Start"
+let g:WhichKeyDesc_buffer_quitdebug= "<Space>dq  Quit"
+
+" navigation
+nmap L <Action>(NextTab)
+nmap H <Action>(PreviousTab)
+nmap <C-h> :action ActivateProjectToolWindow<CR>:action SelectInProjectView<CR>
+
+inoremap jk <Esc>

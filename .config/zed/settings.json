@@ -1,0 +1,56 @@
+{
+    "theme": "Summercamp",
+    "experimental.theme_overrides": {
+        "editor.wrap_guide": "#333"
+    },
+    "wrap_guides": [4, 12, 20],
+    "tab_size": 4,
+    "vim_mode": true,
+    "buffer_font_size": 15,
+    "autosave": "on_focus_change",
+    "format_on_save": "on",
+    "buffer_font_family": "Monaspace Neon",
+    "terminal": {
+        "font_family": "Monaspace Neon",
+        "copy_on_select": true
+    },
+    "hour_format": "hour24",
+    "lsp": {
+        "gopls": {
+            "initialization_options": {
+                "hints": {
+                    "assignVariableTypes": true,
+                    "compositeLiteralFields": true,
+                    "compositeLiteralTypes": true,
+                    "constantValues": true,
+                    "functionTypeParameters": true,
+                    "parameterNames": true,
+                    "rangeVariableTypes": true
+                }
+            }
+        },
+        "rust-analyzer": {
+            "initialization_options": {
+                "checkOnSave": {
+                    "command": "clippy"
+                },
+                "inlayHints": {
+                    "maxLength": null,
+                    "lifetimeElisionHints": {
+                        "useParameterNames": true,
+                        "enable": "skip_trivial"
+                    },
+                    "closureReturnTypeHints": {
+                        "enable": "always"
+                    }
+                }
+            }
+        }
+    },
+    "inlay_hints": {
+        "enabled": true,
+        "show_type_hints": true,
+        "show_parameter_hints": true,
+        "show_other_hints": true
+    }
+}
