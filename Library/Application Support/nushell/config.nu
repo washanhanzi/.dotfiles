@@ -446,15 +446,15 @@ $env.config = {
       {
         name: history_menu
         only_buffer_difference: true
-        marker: "? "
+        marker: "(history) "
         type: {
-            layout: list
-            page_size: 10
+          layout: list
+          page_size: 10
         }
         style: {
-            text: green
-            selected_text: green_reverse
-            description_text: yellow
+          text: green
+          selected_text: green_reverse
+          description_text: yellow
         }
       }
       {
@@ -473,30 +473,6 @@ $env.config = {
             text: green
             selected_text: green_reverse
             description_text: yellow
-        }
-      }
-      # Example of extra menus created using a nushell source
-      # Use the source field to create a list of records that populates
-      # the menu
-      {
-        name: commands_menu
-        only_buffer_difference: false
-        marker: "# "
-        type: {
-            layout: columnar
-            columns: 4
-            col_width: 20
-            col_padding: 2
-        }
-        style: {
-            text: green
-            selected_text: green_reverse
-            description_text: yellow
-        }
-        source: { |buffer, position|
-            $nu.scope.commands
-            | where name =~ $buffer
-            | each { |it| {value: $it.name description: $it.usage} }
         }
       }
       {
@@ -622,14 +598,6 @@ $env.config = {
         ]
       }
     }
-    # Keybindings used to trigger the user defined menus
-    {
-      name: commands_menu
-      modifier: control
-      keycode: char_t
-      mode: [emacs, vi_normal, vi_insert]
-      event: { send: menu name: commands_menu }
-    }
     {
       name: vars_menu
       modifier: alt
@@ -644,28 +612,49 @@ $env.config = {
       mode: [emacs, vi_normal, vi_insert]
       event: { send: menu name: commands_with_description }
     }
-    # find requent used folder
+    # find history folder
     {
-      name: find_frequent_userd_folder
+      name: history_cwd
       modifier: control
       keycode: char_f
       mode: [emacs, vi_normal, vi_insert]
       event: {
         send: ExecuteHostCommand
-        cmd: "commandline (
-            ls /Users/jingyu/Github/
-              | each { |it| $it.name }
-              | uniq
+        cmd: "commandline edit -r (
+            history
+              | get cwd
               | reverse
+              | uniq
               | str join (char -i 0)
-              | fzf --read0 --layout=reverse --height=40%
+              | fzf --read0 --layout=reverse --height=40% --bind=change:top
               | decode utf-8
               | str trim
-          ) --append"
+              | each { |path| $"`($path)`" }
+          )"
+        }
+    }
+    # history commands
+    {
+      name: history_commands
+      modifier: control
+      keycode: char_h
+      mode: [emacs, vi_normal, vi_insert]
+      event: {
+        send: ExecuteHostCommand
+        cmd: "commandline edit -r (
+          history
+           | get command | reverse | uniq  | str join (char -i 0)
+           | fzf --multi --read0 --layout=reverse --height=40% --bind=change:top -q (commandline)
+           | decode utf-8
+           | str trim
+          )"
         }
     }
   ]
 }
+
+# cargo
+alias ca = cargo
 
 # .dotfiles
 alias dotfiles = /usr/bin/git $"--git-dir=($env.HOME)/.dotfiles/" $"--work-tree=($env.HOME)"
@@ -679,16 +668,18 @@ alias vim = nvim
 # finder
 alias finder = /usr/bin/open
 
-# use fzf to find command history
-alias hisf = commandline (history | each { |it| $it.command } | uniq | reverse | str join (char -i 0) | fzf --read0 --layout=reverse --height=40% -q (commandline) | decode utf-8 | str trim)
-
 # zoxide
 source ~/.zoxide.nu
 alias cd = z
 
-# use macos default shell with open
-# def nuopen [arg, --raw (-r)] { if $raw { open -r $arg } else { open $arg } }
-# alias open = ^open
+# custom completions
+source $"($nu.home-path)/.config/nushell/nu_scripts/custom-completions/git/git-completions.nu"
+source $"($nu.home-path)/.config/nushell/nu_scripts/custom-completions/curl/curl-completions.nu"
+source $"($nu.home-path)/.config/nushell/nu_scripts/custom-completions/cargo/cargo-completions.nu"
+source $"($nu.home-path)/.config/nushell/nu_scripts/custom-completions/cargo-make/cargo-make-completions.nu"
+source $"($nu.home-path)/.config/nushell/nu_scripts/custom-completions/rustup/rustup-completions.nu"
 
-# k8s alias
-use /users/jingyu/.config/dev/nushell/scripts/kubernetes.nu *
+# k8s module
+use $"($nu.home-path)/.config/nushell/nu_scripts/modules/lg"
+use $"($nu.home-path)/.config/nushell/nu_scripts/modules/argx"
+use $"($nu.home-path)/.config/nushell/nu_scripts/modules/kubernetes"
