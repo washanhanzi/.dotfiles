@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Name=ClipHist
+Exec=sh -c 'cliphist list | wofi --show dmenu -H 600 -W 900 | cliphist decode | wl-copy'
+Comment=make sure install wl-clipboard, cliphist, wofi
