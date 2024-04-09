@@ -1,0 +1,6 @@
+keymap:
+  - name: copy
+    remap:
+      Super-c: C-c
+      Super-v: C-v
+      Super-a: C-a
