@@ -2,7 +2,7 @@
 Name=Visual Studio Code
 Comment=Code Editing. Refined.
 GenericName=Text Editor
-Exec=/usr/bin/code --unity-launch --password-store="kwallet5" --ozone-platform=wayland  %F
+Exec=/usr/bin/code --unity-launch --password-store="kwallet5" --ozone-platform=wayland --enable-wayland-ime %F
 Icon=visual-studio-code
 Type=Application
 StartupNotify=false

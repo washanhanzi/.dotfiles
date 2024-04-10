@@ -104,6 +104,9 @@ let pnpm_home = $"($nu.home-path)/.local/share/pnpm"
 $env.PNPM_HOME = $pnpm_home
 $env.PATH = ($env.PATH | split row (char esep) | append $pnpm_home)
 
+# dotnet
+$env.PATH = ($env.PATH | split row (char esep) | append $"($nu.home-path)/.dotnet/tools/")
+
 # starship
 mkdir ~/.cache/starship
 starship init nu | save -f ~/.cache/starship/init.nu

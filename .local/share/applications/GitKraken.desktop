@@ -2,7 +2,7 @@
 Name=GitKraken
 Comment=Unleash your repo
 GenericName=Git Client
-Exec=gitkraken --enable-features=UseOzonePlatform --ozone-platform=wayland %f
+Exec=gitkraken --ozone-platform=wayland %f
 Icon=gitkraken
 Terminal=false
 Type=Application

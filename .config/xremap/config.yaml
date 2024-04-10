@@ -1,5 +1,12 @@
+modmap:
+  - name: capslock
+    remap:
+      Capslock:
+        held: Ctrl
+        alone: C-Shift-Space
+        alone_timeout_millis: 1000
 keymap:
-  - name: copy
+  - name: super
     remap:
       Super-c: C-c
       Super-v: C-v

@@ -797,6 +797,44 @@ $env.config = {
             mode: emacs
             event: { edit: selectall }
         }
+     # find history folder
+    {
+      name: history_cwd
+      modifier: control
+      keycode: char_f
+      mode: [emacs, vi_normal, vi_insert]
+      event: {
+        send: ExecuteHostCommand
+        cmd: "commandline edit -r (
+            history
+              | get cwd
+              | reverse
+              | uniq
+              | str join (char -i 0)
+              | fzf --read0 --layout=reverse --height=40% --bind=change:top
+              | decode utf-8
+              | str trim
+              | if $in != "" { $"`($in)`" } else ""
+          )"
+        }
+    }
+    # history commands
+    {
+      name: history_commands
+      modifier: control
+      keycode: char_h
+      mode: [emacs, vi_normal, vi_insert]
+      event: {
+        send: ExecuteHostCommand
+        cmd: "commandline edit -r (
+          history
+           | get command | reverse | uniq  | str join (char -i 0)
+           | fzf --multi --read0 --layout=reverse --height=40% --bind=change:top -q (commandline)
+           | decode utf-8
+           | str trim
+          )"
+        }
+    }    
     ]
 }
 
@@ -805,6 +843,9 @@ alias dotfiles = /usr/bin/git $"--git-dir=($env.HOME)/.dotfiles/" $"--work-tree=
 
 # nvim
 alias vim = nvim
+
+# code
+alias code = /usr/bin/code --password-store="kwallet5" --ozone-platform=wayland
 
 # starship
 use ~/.cache/starship/init.nu
