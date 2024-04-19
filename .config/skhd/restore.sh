@@ -10,7 +10,7 @@ if [[ -s $window_file ]]; then
     echo $last_window_id
 
     # Attempt to restore the window by moving it to the space of the mouse cursor
-    yabai -m window "$last_window_id" --focus
+    yabai -m window "$last_window_id"  --space mouse --focus
 
     # Remove the last line from the file using `sed`
     sed -i '' -e '$ d' "$window_file"
