@@ -12,7 +12,7 @@ sudo yabai --load-sa
 
 
 # scrashpad
-yabai -m rule --add app="^kitty$" scratchpad=Kitty grid=11:11:1:1:9:9
+yabai -m rule --add app="^kitty$" scratchpad=Kitty grid=12:12:2:2:6:6
 
 # If no window on the current space is focused after a window is destroyed or
 # minimized, or an application is hidden, focus the window under the cursor.

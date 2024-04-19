@@ -63,8 +63,8 @@ $env.NU_PLUGIN_DIRS = [
 
 # ruby
 $env.PATH = ($env.PATH | split row (char esep) | prepend '/opt/homebrew/opt/ruby/bin')
-$env.GEM_HOME = '/Users/jingyu/.gem'
-$env.PATH = ($env.PATH | split row (char esep) | append '/Users/jingyu/.gem/bin')
+$env.GEM_HOME = $"($nu.home-path)/.gem"
+$env.PATH = ($env.PATH | split row (char esep) | append $"($nu.home-path)/.gem/bin")
 
 # homebrew
 $env.PATH = ($env.PATH | split row (char esep) | prepend '/opt/homebrew/bin')
@@ -77,7 +77,7 @@ $env.PATH = ($env.PATH | split row (char esep) | prepend $"(pyenv root)/shims")
 # $env.PATH = ($env.PATH | split row (char esep) | prepend '/opt/homebrew/anaconda3/bin')
 
 # golang
-$env.PATH = ($env.PATH | split row (char esep) | append '/Users/jingyu/go/bin')
+$env.PATH = ($env.PATH | split row (char esep) | append $"($nu.config-path)/go/bin")
 $env.PATH = ($env.PATH | split row (char esep) | append '/usr/local/go/bin')
 
 # bin
@@ -87,7 +87,7 @@ $env.PATH = ($env.PATH | split row (char esep) | append '/usr/local/bin/')
 $env.PATH = ($env.PATH | split row (char esep) | append '/Applications/Visual Studio Code.app/Contents/Resources/app/bin')
 
 # rust
-$env.PATH = ($env.PATH | split row (char esep) | append '/Users/jingyu/.cargo/bin')
+$env.PATH = ($env.PATH | split row (char esep) | append $"($nu.home-path)/.cargo/bin")
 
 
 # proxy
@@ -96,7 +96,7 @@ $env.PATH = ($env.PATH | split row (char esep) | append '/Users/jingyu/.cargo/bi
 # $env.NO_PROXY = 'localhost,127.0.0.1,::1'
 
 #pnpm
-let pnpm_home = '/Users/jingyu/Library/pnpm'
+let pnpm_home = $"($nu.home-path)/Library/pnpm"
 $env.PNPM_HOME = $pnpm_home
 $env.PATH = ($env.PATH | split row (char esep) | append $pnpm_home)
 
@@ -127,10 +127,10 @@ zoxide init nushell | str replace --all "def-env" "def --env" | save -f ~/.zoxid
 # $env.PATH = ($env.PATH | split row (char esep) | append $'($env.ANDROID_HOME)/cmdline-tools/latest/bin')
 # $env.PATH = ($env.PATH | split row (char esep) | append $'($env.TOOLCHAIN)/bin')
 #
-# $env.JAVA_HOME = '/Users/jingyu/Applications/Android Studio.app/Contents/jbr/Contents/Home'
-# $env.PATH = ($env.PATH | split row (char esep) | append '/Users/jingyu/Library/Android/sdk/emulator')
-# $env.PATH = ($env.PATH | split row (char esep) | append '/Users/jingyu/Library/Android/sdk/platform-tools')
+# $env.JAVA_HOME = $"($nu.home-path)/Applications/Android Studio.app/Contents/jbr/Contents/Home"
+# $env.PATH = ($env.PATH | split row (char esep) | append $"($nu.home-path)/Library/Android/sdk/emulator")
+# $env.PATH = ($env.PATH | split row (char esep) | append $"($nu.home-path)/Library/Android/sdk/platform-tools")
 
 # flutter
-$env.PATH = ($env.PATH | split row (char esep) | append '/Users/jingyu/flutter/bin')
-$env.PATH = ($env.PATH | split row (char esep) | append '/Users/jingyu/.pub-cache/bin')
+$env.PATH = ($env.PATH | split row (char esep) | append $"($nu.home-path)/Users/jingyu/flutter/bin")
+$env.PATH = ($env.PATH | split row (char esep) | append $"($nu.home-path)/.pub-cache/bin")
