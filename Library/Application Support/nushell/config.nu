@@ -680,6 +680,6 @@ source $"($nu.home-path)/.config/nushell/nu_scripts/custom-completions/cargo-mak
 source $"($nu.home-path)/.config/nushell/nu_scripts/custom-completions/rustup/rustup-completions.nu"
 
 # k8s module
-use $"($nu.home-path)/.config/nushell/nu_scripts/modules/lg"
-use $"($nu.home-path)/.config/nushell/nu_scripts/modules/argx"
-use $"($nu.home-path)/.config/nushell/nu_scripts/modules/kubernetes"
+use $"($nu.home-path)/.config/nushell/nu_scripts/modules/lg" *
+use $"($nu.home-path)/.config/nushell/nu_scripts/modules/argx" *
+use $"($nu.home-path)/.config/nushell/nu_scripts/modules/kubernetes" *

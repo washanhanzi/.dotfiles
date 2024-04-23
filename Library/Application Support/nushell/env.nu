@@ -77,7 +77,7 @@ $env.PATH = ($env.PATH | split row (char esep) | prepend $"(pyenv root)/shims")
 # $env.PATH = ($env.PATH | split row (char esep) | prepend '/opt/homebrew/anaconda3/bin')
 
 # golang
-$env.PATH = ($env.PATH | split row (char esep) | append $"($nu.config-path)/go/bin")
+$env.PATH = ($env.PATH | split row (char esep) | append $"($nu.home-path)/go/bin")
 $env.PATH = ($env.PATH | split row (char esep) | append '/usr/local/go/bin')
 
 # bin
