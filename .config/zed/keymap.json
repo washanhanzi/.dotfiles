@@ -12,10 +12,6 @@
             //buffer navigation
             "shift-h": "pane::ActivatePrevItem",
             "shift-l": "pane::ActivateNextItem",
-            //save buffer
-            "space w": "workspace::Save",
-            //close buffer
-            "space q": "pane::CloseActiveItem",
             //pane navigation
             "ctrl-h": "project_panel::ToggleFocus",
             //hover
@@ -24,12 +20,26 @@
             "g d": "editor::GoToDefinition",
             //command palette
             "space /": "command_palette::Toggle",
-            //toggle outline
+
+            // buffer
+            // save buffer
+            "space w": "workspace::Save",
+            // close buffer
+            "space q": "pane::CloseActiveItem",
+            "space b o": "pane::CloseInactiveItems",
+
+            // search
+            "space F": "workspace::NewSearch",
+            // "space f": "buffer_search::Deploy",
+
+            // toggle outline
             "space o": "outline::Toggle",
+            // code action
             "space a": "editor::ToggleCodeActions",
-            //lsp
+            // lsp
             "space l s": "editor::Rename",
             "space l v": "editor::MoveToEnclosingBracket",
+            // navigation
             "ctrl-j": ["workspace::ActivatePaneInDirection", "Down"]
             // "j": [
             //     "vim::Down",
@@ -62,15 +72,16 @@
     },
     // Proect Panel
     {
-        "context": "ProjectPanel",
+        "context": "ProjectPanel && not_editing",
         "bindings": {
-            "l": "project_panel::Open",
+            "l": ["workspace::SendKeystrokes", "enter"],
             "j": "menu::SelectNext",
             "k": "menu::SelectPrev",
             "ctrl-y": "project_panel::Copy",
             "y": "project_panel::CopyRelativePath"
         }
     },
+    // Pane Navigation
     {
         "context": "Dock",
         "bindings": {
@@ -78,6 +89,15 @@
             "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
             "ctrl-k": ["workspace::ActivatePaneInDirection", "Up"],
             "ctrl-j": ["workspace::ActivatePaneInDirection", "Down"]
+        }
+    },
+    {
+        "context": "ProjectSearchView",
+        "bindings": {
+            "escape": "project_search::ToggleFocus",
+            "cmd-shift-h": "search::ToggleReplace",
+            "alt-cmd-g": "search::ToggleRegex",
+            "alt-cmd-x": "search::ToggleRegex"
         }
     }
 ]

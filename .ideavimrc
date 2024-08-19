@@ -34,7 +34,7 @@ set ideavimsupport+=singleline
 " buffer navigation
 sethandler <c-j> a:vim
 sethandler <c-k> a:vim
-nnoremap <c-h> <c-w>h
+" nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
@@ -45,6 +45,7 @@ map <leader>q <Action>(CloseContent)
 nnoremap <leader>w :action SaveDocument<CR>
 map <leader>f <Action>(SearchEverywhere)
 map <leader>a :action ShowIntentionActions<CR>
+map <leader>v :action SplitVertically<CR>
 " lsp
 map <leader>ls <Action>(RenameElement)
 map <leader>lk <Action>(GotoPreviousError)
@@ -61,6 +62,7 @@ map <leader>dq :action Stop<CR>
 let g:WhichKey_DefaultDelay = 0
 let g:WhichKeyDesc_close = "<Space>q  Close"
 let g:WhichKeyDesc_save = "<Space>w  Save"
+let g:WhichKeyDesc_split_vertically = "<Space>v  Split"
 let g:WhichKeyDesc_search = "<Space>f  Search"
 let g:WhichKeyDesc_action = "<Space>a  Context Action"
 let g:WhichKeyDesc_lsp= "<Space>l  lsp"

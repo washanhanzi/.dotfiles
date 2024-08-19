@@ -47,7 +47,8 @@ echo '  ,'
 ip=$(networksetup -getinfo wi-fi | grep -Ei '(^IP address:)' | awk '{print $3}')
 mac=$(networksetup -getinfo wi-fi | grep -Ei '(^Wi-Fi ID:)' | awk '{print $3}')
 router=$(networksetup -getinfo wi-fi | grep -Ei '(^Router:)' | awk '{print $2}')
-exportService "wi-fi"
+ssid=$(networksetup -getairportnetwork en0 | awk -F ': ' '{print $2}')
+exportService "$ssid"
 
 # End the JSON
 endJSON

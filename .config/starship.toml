@@ -1,5 +1,6 @@
 [aws]
 format = '\[[$symbol($profile)(\($region\))(\[$duration\])]($style)\]'
+disabled = true
 
 [bun]
 format = '\[[$symbol($version)]($style)\]'
@@ -93,7 +94,8 @@ format = '\[[$symbol($version)]($style)\]'
 [kubernetes]
 format = '\[[$symbol$context( \($namespace\))]($style)\]'
 # detect_folders = ['starship']
-detect_files = ['vs.yaml', 'config.yaml']
+# detect_files = ['vs.yaml', 'config.yaml']
+detect_extensions = ["yaml","yml"]
 disabled = false
 
 [lua]

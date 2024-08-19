@@ -61,10 +61,16 @@ $env.NU_PLUGIN_DIRS = [
 # To add entries to PATH (on Windows you might use Path), you can use the following pattern:
 # $env.PATH = ($env.PATH | split row (char esep) | prepend '/some/path')
 
+# encoding
+$env.LC_ALL = en_US.UTF-8
+
 # ruby
 $env.PATH = ($env.PATH | split row (char esep) | prepend '/opt/homebrew/opt/ruby/bin')
 $env.GEM_HOME = $"($nu.home-path)/.gem"
 $env.PATH = ($env.PATH | split row (char esep) | append $"($nu.home-path)/.gem/bin")
+
+# libpq
+$env.PATH = ($env.PATH | split row (char esep) | append "/opt/homebrew/opt/libpq/bin")
 
 # homebrew
 $env.PATH = ($env.PATH | split row (char esep) | prepend '/opt/homebrew/bin')
@@ -88,7 +94,6 @@ $env.PATH = ($env.PATH | split row (char esep) | append '/Applications/Visual St
 
 # rust
 $env.PATH = ($env.PATH | split row (char esep) | append $"($nu.home-path)/.cargo/bin")
-
 
 # proxy
 # $env.http_proxy = 'http://127.0.0.1:7890'

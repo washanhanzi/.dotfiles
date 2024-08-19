@@ -1,7 +1,13 @@
 {
+    "project_panel": {},
     "theme": "Summercamp",
     "experimental.theme_overrides": {
-        "editor.wrap_guide": "#333"
+        "editor.wrap_guide": "#333",
+        "syntax": {
+            "comment": {
+                "color": "#64DD17"
+            }
+        }
     },
     "wrap_guides": [4, 12, 20],
     "tab_size": 4,
@@ -52,5 +58,8 @@
         "show_type_hints": true,
         "show_parameter_hints": true,
         "show_other_hints": true
+    },
+    "tabs": {
+        "git_status": true
     }
 }
