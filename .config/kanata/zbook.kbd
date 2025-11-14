@@ -1,0 +1,45 @@
+;; ===== Global config =====
+(defcfg
+  linux-dev-names-include ("AT Translated Set 2 keyboard")
+  
+  ;; Let Kanata see keys even if they aren't in defsrc,
+  ;; so defoverrides etc. work.
+  process-unmapped-keys yes
+)
+
+;; We only need to list keys we actually manipulate.
+(defsrc
+  caps
+  a c v f
+  lctl lmet lalt spc ralt rctl
+)
+
+;; ===== Base layer =====
+;; - Swap left Alt and left Super
+;; - Caps = tap CapsLock / hold Ctrl
+(defalias
+  caps-ctl (tap-hold 200 200 caps lctl)
+)
+
+(deflayer base
+  ;; caps
+  @caps-ctl
+
+  ;; letters
+  a c v f
+
+  ;; bottom row:
+  ;; physical: [lctl][Win][Alt][Space][RAlt][RCtrl]
+  ;; logical:  [lctl][ Alt][Super][Space][RAlt][RCtrl]
+  lctl lalt lmet spc ralt rctl
+)
+
+;; ===== Overrides: Super+C/V/F => Ctrl+C/V/F =====
+;; This works on the *output* keys, so it sees the swapped Super.
+(defoverrides
+  (lmet c) (lctl c)
+  (lmet v) (lctl v)
+  (lmet f) (lctl f)
+  (lmet a) (lctl a)
+)
+
