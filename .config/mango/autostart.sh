@@ -1,0 +1,13 @@
+# top bar
+waybar -c ~/.config/mango/waybar/config.jsonc -s ~/.config/mango/waybar/style.css >/dev/null 2>&1 &
+
+# Tell dbus about the Wayland session so it can launch portals
+dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots &
+
+# --- Add these lines for Dark Theme ---
+# Tells modern apps (GTK4, Flatpak) to prefer dark mode
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+
+# Tells older GTK3 apps to use a specific dark theme (e.g., Adwaita-dark)
+gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+
