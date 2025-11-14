@@ -2,8 +2,6 @@
   "modules-left": [
     "ext/workspaces",
     "custom/sep",
-    "dwl/window#layout",
-    "custom/sep",
     "dwl/window#title"
   ],
   "modules-right": [
@@ -22,9 +20,9 @@
     "custom/sep",
     "tray"
   ],
-
   "clock": {
-    "format-alt": "{:%Y-%m-%d}"
+   "format": "{:%A %m-%d %H:%M}",
+   "interval": 60
   },
   "cpu": {
     "format": "CPU: {usage}%",
@@ -62,9 +60,6 @@
   },
   "dwl/tags": {
     "num-tags": 9
-  },
-  "dwl/window#layout": {
-    "format": "[{layout}]"
   },
   "dwl/window#title": {
     "format": "{title}"
