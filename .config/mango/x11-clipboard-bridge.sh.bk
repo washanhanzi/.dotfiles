@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Bridge Wayland clipboard -> X11 clipboard for:
+#   - text
+#   - images (png/jpeg)
+#   - file URI lists
+
+set -euo pipefail
+
+# ---------- text: Wayland -> X11 ----------
+wl-paste --type text --watch xclip -selection clipboard -in &
+
+# ---------- images: Wayland -> X11 ----------
+# PNG (matches your known-good manual command)
+wl-paste --type image/png --watch \
+  xclip -selection clipboard -t image/png -in &
+
+# JPEG (some apps offer only jpeg)
+wl-paste --type image/jpeg --watch \
+  xclip -selection clipboard -t image/jpeg -in &
+
+# ---------- files: Wayland -> X11 ----------
+# Option A: keep real text/uri-list
+wl-paste --type text/uri-list --watch \
+  xclip -selection clipboard -t text/uri-list -in &
+
+# If you prefer clean paths instead of file:///… text,
+# comment the block above and use this instead:
+#
+# wl-paste --type text/uri-list --watch \
+#   sh -c 'sed "s|^file://||" | head -n 1 | xclip -selection clipboard -in' &
+
+wait
