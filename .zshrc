@@ -2,14 +2,29 @@
 autoload -Uz compinit
 compinit
 
+# ------- up down key
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search # Up
+bindkey "^[[B" down-line-or-beginning-search # Down
+
+# kubectl auto complete
+source <(kubectl completion zsh)
+# kubectl aliases pack
+[ -f ~/.kubectl_aliases ] && source ~/.kubectl_aliases
+
+# gnome-keyring
+if [ -n "$DESKTOP_SESSION" ]; then
+    export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/keyring/ssh
+fi
+
 # Smarter completion behavior
 setopt MENU_COMPLETE          # show a menu when multiple matches
 setopt AUTO_MENU              # keep cycling through menu on repeated Tab
 setopt COMPLETE_IN_WORD       # complete in the middle of a word
 
-# Use prefix-based history search on up/down arrow
-bindkey '^[[A' history-beginning-search-backward  # Up
-bindkey '^[[B' history-beginning-search-forward   # Down
 
 # --- Starship prompt ---
 eval "$(starship init zsh)"
@@ -24,6 +39,10 @@ alias vim='nvim'
 alias sudo='sudo '
 alias dotfiles='git --git-dir=$HOME/github/.dotfiles --work-tree=$HOME'
 
+# PATH
+# .local/bin
+export PATH="$HOME/.local/bin:$PATH"
+
 # Autosuggestions (ghost text based on history)
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
@@ -35,13 +54,11 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.zsh_history
-
 setopt INC_APPEND_HISTORY            # append as you go
 setopt SHARE_HISTORY                # if multiple shells
 setopt HIST_IGNORE_ALL_DUPS         # remove older duplicates, keep latest
 # setopt HIST_IGNORE_DUPS             # skip immediate duplicate commands
 # setopt HIST_FIND_NO_DUPS            # during interactive search, don’t show duplicates
-
 fzf-history-widget() {
   # 1. Get history with epoch timestamps ('%s') and no line numbers ('-n')
   # 2. Reverse it (tac) to get oldest-first
@@ -65,8 +82,15 @@ fzf-history-widget() {
   CURSOR=${#BUFFER}
   zle reset-prompt
 }
-
 zle -N fzf-history-widget
 bindkey '^F' fzf-history-widget
 
+#yazi
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
 
