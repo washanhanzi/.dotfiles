@@ -43,6 +43,14 @@ alias dotfiles='git --git-dir=$HOME/github/.dotfiles --work-tree=$HOME'
 # .local/bin
 export PATH="$HOME/.local/bin:$PATH"
 
+# clipboard
+export CLIPBOARD_HISTORY=10y   # 10 years of history
+
+# kitten ssh
+if [[ "$TERM" == "xterm-kitty" ]]; then
+  alias ssh="kitten ssh"
+fi
+
 # Autosuggestions (ghost text based on history)
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'

@@ -5,5 +5,5 @@ profile docked {
 }
 
 profile undocked {
-    output eDP-1 enable mode 2880x1800 position 0,0 scale 1.5
+    output eDP-1 enable
 }

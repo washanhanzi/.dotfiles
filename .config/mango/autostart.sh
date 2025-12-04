@@ -4,7 +4,9 @@ eval $(gnome-keyring-daemon --start --components=secrets,ssh)
 export SSH_AUTH_SOCK
 # 2. (Optional) Apply environment variables to systemd user session 
 # This helps other apps find the keyring
-dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP SSH_AUTH_SOCK
+dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots SSH_AUTH_SOCK
+# The next line of command is not necessary. It is only to avoid some situations where it cannot start automatically
+/usr/lib/xdg-desktop-portal-wlr &
 
 # top bar
 waybar -c ~/.config/mango/waybar/config.jsonc -s ~/.config/mango/waybar/style.css >/dev/null 2>&1 &
@@ -26,8 +28,7 @@ mako &
 
 # background
 awww-daemon --format xrgb &
-sleep 0.2
-awww img ~/pictures/rust.png
+~/.config/mango/wallpaper.sh &
 
 # IME
 fcitx5 -d --replace
