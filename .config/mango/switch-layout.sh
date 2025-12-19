@@ -106,4 +106,5 @@ done
 ########################################
 # 7. Notify (minimal style you asked for)
 ########################################
-notify-send "Layout" "$name"
+DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS:-unix:path=/run/user/$(id -u)/bus}" \
+  notify-send "Layout" "$name"

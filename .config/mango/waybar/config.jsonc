@@ -10,11 +10,9 @@
     "custom/sep",
     "network",
     "custom/sep",
-    "cpu",
+    "custom/kdedevil",
     "custom/sep",
     "memory",
-    "custom/sep",
-    "disk",
     "custom/sep",
     "clock",
     "custom/sep",
@@ -64,5 +62,19 @@
   "custom/sep": {
     "format": "|",
     "interval": 0
+  },
+  "custom/kdedevil": {
+    // Logic:
+    // 1. Get list of connected devices.
+    // 2. Count lines (wc -l).
+    // 3. If count > 0, output JSON with Icon + Count.
+    // 4. Else, output nothing (which hides the module).
+    "exec": "count=$(bluetoothctl devices Connected | wc -l); if [ \"$count\" -gt 0 ]; then echo \"{\\\"text\\\": \\\" $count\\\", \\\"tooltip\\\": \\\"Connected Devices: $count\\\", \\\"class\\\": \\\"connected\\\"}\"; fi",
+    // 2. Refresh every 2 seconds
+    "interval": 2,
+    // 3. Output as JSON so we can use classes (on/off) for color
+    "return-type": "json",
+    // 4. Launch KDE Bluetooth Settings on click
+    "on-click": "kcmshell6 kcm_bluetooth"
   }
 }

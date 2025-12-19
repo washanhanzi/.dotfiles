@@ -38,6 +38,7 @@ alias la='eza -lha --group-directories-first'
 alias vim='nvim'
 alias sudo='sudo '
 alias dotfiles='git --git-dir=$HOME/github/.dotfiles --work-tree=$HOME'
+alias open='kioclient exec .'
 
 # PATH
 # .local/bin
@@ -101,4 +102,5 @@ function y() {
 	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
 	rm -f -- "$tmp"
 }
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
